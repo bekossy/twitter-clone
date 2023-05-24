@@ -6,7 +6,7 @@ export const getAllTweets = async (req:Request, res:Response) => {
     try {
         const data = await Tweet.find({}).sort({createdAt: -1})
         res.status(200).json(data)
-    } catch (error) {
+    } catch (error:any) {
         res.status(400).json({error: error.message})
     }
 }
@@ -17,7 +17,7 @@ export const addNewTweet =async (req:Request, res:Response) => {
     try {
         const data = await Tweet.create({tweet})
         res.status(200).json(data)
-    } catch (error) {
+    } catch (error:any) {
         res.status(400).json({error: error.message})
     }
 }
@@ -29,7 +29,7 @@ export const deleteTweet =async (req:Request, res:Response) => {
         const data = await Tweet.findOneAndDelete({_id: id});
         if(!data) return res.status(404).json({error: "No document found"})
         res.status(200).json(data)
-    } catch (error) {
+    } catch (error:any) {
         res.status(404).json({error:error.message})
     }
 }
