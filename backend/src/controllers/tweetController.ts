@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Tweet from "../models/tweetModel";
 import mongoose from "mongoose";
+import { CustomRequest } from "../middleware/authTweets";
 
 export const getAllTweets = async (req:Request, res:Response) => {
     try {
@@ -11,11 +12,12 @@ export const getAllTweets = async (req:Request, res:Response) => {
     }
 }
 
-export const addNewTweet =async (req:Request, res:Response) => {
+export const addNewTweet =async (req:CustomRequest, res:Response) => {
     const {tweet} = req.body;
 
     try {
-        const data = await Tweet.create({tweet})
+        const user_id = req.user._id
+        const data = await Tweet.create({tweet, user_id})
         res.status(200).json(data)
     } catch (error:any) {
         res.status(400).json({error: error.message})
