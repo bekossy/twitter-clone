@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema
 
-const tweetModel = new Schema({
-    tweet: String
+const tweetSchema = new Schema({
+    tweet: String,
+    user_id: {type: String, required: true},
 }, {timestamps: true})
 
-const Tweet = mongoose.model("Tweet", tweetModel)
+const Tweet = mongoose.model("Tweet", tweetSchema)
 
 export default Tweet
