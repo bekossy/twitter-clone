@@ -1,9 +1,12 @@
-import { Box, Divider, TextField, Typography, styled } from "@mui/material";
+import { Alert, Box, Divider, TextField, Typography, styled } from "@mui/material";
 import TwitterIcon from '@mui/icons-material/Twitter';
 import GoogleIcon from "../assets/googleIcon.svg";
 import AppleIcon from '@mui/icons-material/Apple';
 import { useState } from 'react';
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../redux/actions/authAction";
+import { RootState } from "../redux/store";
 
 const SignupBox = styled(Box)({
   display: "flex",
@@ -68,6 +71,11 @@ const Login = () => {
   const [isNext, setIsNext] = useState<boolean>(false);
   const [helpText, setHelpText] = useState<string>("");
   const [isError, setIsError] = useState(false);
+  const dispatch = useDispatch();
+  const { loading, user, error } = useSelector((state: RootState) => state.auth);
+
+  console.log(user);
+
 
   const handleNext = () => {
     if (email) {
@@ -81,7 +89,9 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  }
+    dispatch(login(email, password));
+  };
+
   return (
     <>
       <SignupBox>
@@ -129,19 +139,23 @@ const Login = () => {
                 </>
               )}
 
+              {
+                error && <Alert severity="error">{error}</Alert>
+              }
+
               {isNext && (
                 <>
-                  <SignupBtn sx={{ fontWeight: 600, backgroundColor: "black", color: "#fff", "&:hover": { backgroundColor: "rgba(0,0,0,0.9)" } }} type="submit">Log In</SignupBtn>
-                </>
-              )}
-
-              {isNext || (
-                <>
-                  <SignupBtn type="button" sx={{ fontWeight: 600, backgroundColor: "black", color: "#fff", "&:hover": { backgroundColor: "rgba(0,0,0,0.9)" } }} onClick={handleNext}>Next</SignupBtn>
-                  <SignupBtn type="button" sx={{ fontWeight: 700 }}>Forgot password?</SignupBtn>
+                  <SignupBtn sx={{ fontWeight: 600, backgroundColor: "black", color: "#fff", "&:hover": { backgroundColor: "rgba(0,0,0,0.9)" } }} type="submit">{loading ? "Logging" : "Log In"}</SignupBtn>
                 </>
               )}
             </Box>
+
+            {isNext || (
+              <>
+                <SignupBtn type="button" sx={{ fontWeight: 600, backgroundColor: "black", color: "#fff", "&:hover": { backgroundColor: "rgba(0,0,0,0.9)" } }} onClick={handleNext}>Next</SignupBtn>
+                <SignupBtn type="button" sx={{ fontWeight: 700 }}>Forgot password?</SignupBtn>
+              </>
+            )}
 
             <Typography variant='body2' color={"#536471"} textAlign={"left"}>Don't have an account? <Link to={"/signup"} style={{ color: "#1D9BF0", textDecoration: "none" }}>Sign Up</Link></Typography>
           </SignupContent>
