@@ -67,7 +67,7 @@ const Signup = () => {
     const [name, setName] = useState<string>("");
     const [createOpen, setCreateOpen] = useState<boolean>(false);
     const dispatch = useDispatch();
-    const { loading, error, user } = useSelector((state: RootState) => state.auth);
+    const { loading, error } = useSelector((state: RootState) => state.auth);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

@@ -72,9 +72,7 @@ const Login = () => {
   const [helpText, setHelpText] = useState<string>("");
   const [isError, setIsError] = useState(false);
   const dispatch = useDispatch();
-  const { loading, user, error } = useSelector((state: RootState) => state.auth);
-
-  console.log(user);
+  const { loading, error } = useSelector((state: RootState) => state.auth);
 
 
   const handleNext = () => {
@@ -127,16 +125,14 @@ const Login = () => {
               />
 
               {isNext && (
-                <>
-                  <TextInput
-                    label="Password"
-                    type='password'
-                    variant="outlined"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    helperText={!password ? "Enter your password" : ""}
-                  />
-                </>
+                <TextInput
+                  label="Password"
+                  type='password'
+                  variant="outlined"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  helperText={!password ? "Enter your password" : ""}
+                />
               )}
 
               {
@@ -144,9 +140,7 @@ const Login = () => {
               }
 
               {isNext && (
-                <>
-                  <SignupBtn sx={{ fontWeight: 600, backgroundColor: "black", color: "#fff", "&:hover": { backgroundColor: "rgba(0,0,0,0.9)" } }} type="submit">{loading ? "Logging" : "Log In"}</SignupBtn>
-                </>
+                <SignupBtn sx={{ fontWeight: 600, backgroundColor: "black", color: "#fff", "&:hover": { backgroundColor: "rgba(0,0,0,0.9)" } }} type="submit">{loading ? "Loading" : "Submit"}</SignupBtn>
               )}
             </Box>
 
