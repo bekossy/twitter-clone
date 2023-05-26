@@ -1,9 +1,12 @@
-import { Box, InputAdornment, TextField, Typography, styled } from '@mui/material';
+import { Alert, Box, InputAdornment, TextField, Typography, styled } from '@mui/material';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import { useState } from 'react';
 import SignupCreate from '../components/SignupCreate';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signup } from '../redux/actions/authAction';
+import { RootState } from '../redux/store';
 
 const SignupBox = styled(Box)({
     display: "flex",
@@ -63,13 +66,14 @@ const Signup = () => {
     const [password, setPassword] = useState<string>("");
     const [name, setName] = useState<string>("");
     const [createOpen, setCreateOpen] = useState<boolean>(false);
+    const dispatch = useDispatch();
+    const { loading, error, user } = useSelector((state: RootState) => state.auth);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // console.log(username.replace(/\s/g, ""));
+        dispatch(signup(email, password, username, name));
     };
-
 
     return (
         <>
@@ -92,7 +96,7 @@ const Signup = () => {
                                 <TextInput
                                     label="Username"
                                     variant="outlined"
-                                    value={username}
+                                    value={username.replace(/\s/g, "")}
                                     onChange={(e) => setUsername(e.target.value)}
                                     InputProps={{
                                         startAdornment: (
@@ -117,7 +121,11 @@ const Signup = () => {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
 
-                                <FormBtn type="submit">Submit</FormBtn>
+                                {
+                                    error && <Alert severity="error">{error}</Alert>
+                                }
+
+                                <FormBtn type="submit">{loading ? "Loading" : "Submit"}</FormBtn>
                             </Box>
                         ) : <SignupCreate setCreateOpen={setCreateOpen} />}
 
