@@ -10,11 +10,23 @@ export const login = (email: string, password: string):any => async (dispatch:an
 
     dispatch({ type: actionTypes.POST_AUTH_SUCCESS, payload: data });
     
-  } catch (error: any) {
-    dispatch({
-      type: actionTypes.POST_AUTH_FAIL,
-      payload: error.response.data.error
-    });
+  } catch (error: any) {      
+    if (error.response) {
+      dispatch({
+        type: actionTypes.POST_AUTH_FAIL,
+        payload: error.response.data.error
+      });
+    } else if (error.request) {
+      dispatch({
+        type: actionTypes.POST_AUTH_FAIL,
+        payload: "Please check your internet connection."
+      });
+    } else {
+      dispatch({
+        type: actionTypes.POST_AUTH_FAIL,
+        payload: "An error occurred while processing the request."
+      });
+    }
   }
 };
 
@@ -29,9 +41,21 @@ export const signup = (email: string, password: string, username:string, profile
     dispatch({ type: actionTypes.POST_AUTH_SUCCESS, payload: data });
     
   } catch (error: any) {
-    dispatch({
-      type: actionTypes.POST_AUTH_FAIL,
-      payload: error.response.data.error
-    });
+    if (error.response) {
+      dispatch({
+        type: actionTypes.POST_AUTH_FAIL,
+        payload: error.response.data.error
+      });
+    } else if (error.request) {
+      dispatch({
+        type: actionTypes.POST_AUTH_FAIL,
+        payload: "Please check your internet connection."
+      });
+    } else {
+      dispatch({
+        type: actionTypes.POST_AUTH_FAIL,
+        payload: "An error occurred while processing the request."
+      });
+    }
   }
 }
