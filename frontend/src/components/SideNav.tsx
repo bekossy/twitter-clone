@@ -11,6 +11,13 @@ import ListIcon from "../assets/listIcon.svg";
 import { Avatar, Box, Stack, Typography, styled, Badge, Menu, MenuItem } from '@mui/material';
 import { useState } from 'react';
 
+const Box1 = styled(Box)(({ theme }) => ({
+    flex: 1,
+    [theme.breakpoints.down("xl")]: {
+        flex: "0 0 10%"
+    }
+}))
+
 const SideNavBox = styled(Box)(({ theme }) => ({
     width: "300px",
     height: "100%",
@@ -20,6 +27,7 @@ const SideNavBox = styled(Box)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
     padding: "0 10px",
+    backgroundColor: "#fff",
     [theme.breakpoints.down("xl")]: {
         width: "fit-content",
         alignItems: "center"
@@ -30,11 +38,11 @@ const NavPadding = styled(Stack)(({ theme }) => ({
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
-    padding: "12px 18px",
+    padding: "10px 18px",
     borderRadius: "50px",
     gap: "20px",
     cursor: "pointer",
-    margin: "3px 0",
+    margin: "2px 0",
     width: "fit-content",
     transition: "all 0.3s ease-in",
     "&:hover": {
@@ -66,7 +74,7 @@ const NavIcon = styled(Stack)(({ theme }) => ({
 const NavTweet = styled(Stack)(({ theme }) => ({
     display: "block",
     textAlign: "center",
-    padding: "12px 18px",
+    padding: "10px 18px",
     borderRadius: "50px",
     gap: "20px",
     cursor: "pointer",
@@ -100,7 +108,7 @@ const NavBtn = styled("button")({
 
 const NavAvatar = styled(Box)(({ theme }) => ({
     display: "none",
-    padding: "12px 18px",
+    padding: "10px 18px",
     borderRadius: "50px",
     cursor: "pointer",
     margin: "3px 0",
@@ -119,7 +127,7 @@ const NavMenu = styled(Stack)(({ theme }) => ({
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
-    padding: "12px 18px",
+    padding: "10px 18px",
     borderRadius: "50px",
     gap: "20px",
     cursor: "pointer",
@@ -146,7 +154,7 @@ const SideNav = () => {
 
     return (
         <>
-            <Box flex={1}>
+            <Box1>
                 <SideNavBox>
                     <Stack>
                         <NavPadding>
@@ -250,7 +258,7 @@ const SideNav = () => {
                     </Menu>
 
                 </SideNavBox >
-            </Box >
+            </Box1 >
         </>
     )
 }
