@@ -2,6 +2,7 @@ import { Box, styled } from "@mui/material"
 import SideNav from "../components/SideNav"
 import Home from "../components/Home"
 import Trends from "../components/Trends"
+import Message from "../components/Message"
 
 const HomepageBox = styled(Box)({
   display: "flex"
@@ -14,6 +15,7 @@ const Homepage = () => {
         <SideNav />
         <Home />
         <Trends />
+        <Message />
       </HomepageBox>
     </>
   )
