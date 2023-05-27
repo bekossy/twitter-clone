@@ -1,4 +1,4 @@
-import { Alert, Box, Divider, TextField, Typography, styled } from "@mui/material";
+import { Alert, Box, CircularProgress, Divider, TextField, Typography, styled } from "@mui/material";
 import TwitterIcon from '@mui/icons-material/Twitter';
 import GoogleIcon from "../assets/googleIcon.svg";
 import AppleIcon from '@mui/icons-material/Apple';
@@ -61,6 +61,13 @@ const SignupBtn = styled("button")({
   transition: "all 0.2s ease-out",
   "&:hover": {
     backgroundColor: "rgba(0,0,0,0.05)"
+  },
+  "&:disabled": {
+    backgroundColor: "rgba(0,0,0,0.8)",
+    cursor: "default"
+  },
+  "&:disabled:hover": {
+    backgroundColor: "rgba(0,0,0,0.8)"
   }
 });
 
@@ -135,12 +142,12 @@ const Login = () => {
                 />
               )}
 
-              {
-                error && <Alert severity="error">{error}</Alert>
-              }
+              {isNext && (
+                error && <Alert severity="error" sx={{ textAlign: "left" }}>{error}</Alert>
+              )}
 
               {isNext && (
-                <SignupBtn sx={{ fontWeight: 600, backgroundColor: "black", color: "#fff", "&:hover": { backgroundColor: "rgba(0,0,0,0.9)" } }} type="submit">{loading ? "Loading" : "Submit"}</SignupBtn>
+                <SignupBtn disabled={loading} sx={{ fontWeight: 600, backgroundColor: "black", color: "#fff", "&:hover": { backgroundColor: "rgba(0,0,0,0.9)" } }} type="submit">{loading ? <CircularProgress size={24} sx={{ color: "#fff" }} /> : "Submit"}</SignupBtn>
               )}
             </Box>
 

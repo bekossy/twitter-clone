@@ -1,4 +1,4 @@
-import { Alert, Box, InputAdornment, TextField, Typography, styled } from '@mui/material';
+import { Alert, Box, CircularProgress, InputAdornment, TextField, Typography, styled } from '@mui/material';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import { useState } from 'react';
@@ -57,7 +57,16 @@ const FormBtn = styled("button")({
     fontWeight: 600,
     backgroundColor: "#000",
     color: "#fff",
-    "&:hover": { backgroundColor: "rgba(0,0,0,0.85)" },
+    "&:hover": {
+        backgroundColor: "rgba(0,0,0,0.85)"
+    },
+    "&:disabled": {
+        backgroundColor: "rgba(0,0,0,0.8)",
+        cursor: "default"
+    },
+    "&:disabled:hover": {
+        backgroundColor: "rgba(0,0,0,0.8)"
+    }
 });
 
 const Signup = () => {
@@ -122,10 +131,10 @@ const Signup = () => {
                                 />
 
                                 {
-                                    error && <Alert severity="error">{error}</Alert>
+                                    error && <Alert severity="error" sx={{ textAlign: "left" }}>{error}</Alert>
                                 }
 
-                                <FormBtn type="submit">{loading ? "Loading" : "Submit"}</FormBtn>
+                                <FormBtn type="submit">{loading ? <CircularProgress size={24} sx={{ color: "#fff" }} /> : "Submit"}</FormBtn>
                             </Box>
                         ) : <SignupCreate setCreateOpen={setCreateOpen} />}
 
