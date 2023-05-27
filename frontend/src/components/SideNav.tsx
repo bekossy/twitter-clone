@@ -23,7 +23,7 @@ const SideNavBox = styled(Box)(({ theme }) => ({
     height: "100%",
     overflowY: "auto",
     position: "fixed",
-    borderRight: "1px solid #000",
+    borderRight: "1px solid rgb(239, 243, 244)",
     display: "flex",
     flexDirection: "column",
     padding: "0 10px",
