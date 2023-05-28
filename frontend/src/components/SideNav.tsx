@@ -49,7 +49,7 @@ const NavPadding = styled(Stack)(({ theme }) => ({
         backgroundColor: "rgba(0,0,0,0.1)",
     },
     [theme.breakpoints.down("xl")]: {
-        padding: "8px 10px",
+        padding: "10px",
     }
 }));
 
