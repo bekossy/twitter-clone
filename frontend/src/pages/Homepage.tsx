@@ -5,7 +5,8 @@ import Trends from "../components/Trends"
 import Message from "../components/Message"
 
 const HomepageBox = styled(Box)({
-  display: "flex"
+  display: "flex",
+  gap: "10px"
 })
 
 const Homepage = () => {
