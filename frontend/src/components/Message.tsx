@@ -1,4 +1,5 @@
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import KeyboardDoubleArrowUpOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowUpOutlined';
+import ForwardToInboxOutlinedIcon from '@mui/icons-material/ForwardToInboxOutlined';
 import { Box, Typography, styled } from '@mui/material';
 import { Stack } from '@mui/system';
 
@@ -37,10 +38,10 @@ const Message = () => {
 
                 <Stack direction={"row"} alignItems={"center"}>
                     <IconPadding>
-                        <PersonOutlineOutlinedIcon />
+                        <ForwardToInboxOutlinedIcon />
                     </IconPadding>
                     <IconPadding>
-                        <PersonOutlineOutlinedIcon />
+                        <KeyboardDoubleArrowUpOutlinedIcon />
                     </IconPadding>
                 </Stack>
             </MessageBox>
