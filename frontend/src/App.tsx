@@ -1,9 +1,11 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import Homepage from "./pages/Homepage"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup";
+import { useSelector } from 'react-redux';
+import { RootState } from './redux/store';
 
 const theme = createTheme({
   breakpoints: {
@@ -19,14 +21,15 @@ const theme = createTheme({
 });
 
 function App() {
+  const { user } = useSelector((state: RootState) => state.auth);
   return (
     <>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<Homepage />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/signup' element={<Signup />} />
+            <Route path='/' element={user ? <Homepage /> : <Navigate to={"/login"} />} />
+            <Route path='/login' element={!user ? <Login /> : <Navigate to={"/"} />} />
+            <Route path='/signup' element={!user ? <Signup /> : <Navigate to={"/"} />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
