@@ -50,6 +50,12 @@ const NavPadding = styled(Stack)(({ theme }) => ({
     "&:hover": {
         backgroundColor: "rgba(0,0,0,0.1)",
     },
+    "& svg": {
+        fontSize: "30px"
+    },
+    "& img": {
+        width: "30px"
+    },
     [theme.breakpoints.down("xl")]: {
         padding: "10px",
     }
@@ -67,6 +73,9 @@ const NavIcon = styled(Stack)(({ theme }) => ({
     color: "#fff",
     "&:hover": {
         backgroundColor: "#138adf",
+    },
+    "& svg": {
+        fontSize: "30px"
     },
     [theme.breakpoints.down("xl")]: {
         display: "block"
@@ -160,11 +169,11 @@ const SideNav = () => {
                 <SideNavBox>
                     <Stack>
                         <NavPadding>
-                            <TwitterIcon sx={{ color: "#1D9BF0", fontSize: "30px" }} />
+                            <TwitterIcon sx={{ color: "#1D9BF0" }} />
                         </NavPadding>
                         <NavPadding>
                             <Badge color="primary" variant="dot" sx={{ '& .MuiBadge-badge': { bgcolor: "#1D9BF0", right: "2px" } }}>
-                                <HomeIcon sx={{ fontSize: "30px" }} />
+                                <HomeIcon />
                             </Badge>
                             <NavText fontWeight={600}>Home</NavText>
                         </NavPadding>
@@ -187,15 +196,15 @@ const SideNav = () => {
                             <NavText>Lists</NavText>
                         </NavPadding>
                         <NavPadding>
-                            <BookmarkBorderOutlinedIcon sx={{ fontSize: "30px" }} />
+                            <BookmarkBorderOutlinedIcon />
                             <NavText>Bookmarks</NavText>
                         </NavPadding>
                         <NavPadding>
-                            <TwitterIcon sx={{ fontSize: "30px" }} />
+                            <TwitterIcon />
                             <NavText>Twitter Blue</NavText>
                         </NavPadding>
                         <NavPadding>
-                            <PersonOutlineOutlinedIcon sx={{ fontSize: "30px" }} />
+                            <PersonOutlineOutlinedIcon />
                             <NavText>Profile</NavText>
                         </NavPadding>
                         <NavPadding>
@@ -206,7 +215,7 @@ const SideNav = () => {
                             <NavText>Tweet</NavText>
                         </NavTweet>
                         <NavIcon>
-                            <TwitterIcon sx={{ fontSize: "30px" }} />
+                            <TwitterIcon />
                         </NavIcon>
                     </Stack>
 
