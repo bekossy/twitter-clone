@@ -8,7 +8,8 @@ export const login = (email: string, password: string):any => async (dispatch:an
 
     const { data } = await axios.post("http://localhost:5000/api/auth/login", { email, password });
 
-    dispatch({ type: actionTypes.POST_AUTH_SUCCESS, payload: data });    
+    dispatch({ type: actionTypes.POST_AUTH_SUCCESS, payload: data });
+    localStorage.setItem("user", JSON.stringify(data)); 
     
   } catch (error: any) {
     if (error.response) {
