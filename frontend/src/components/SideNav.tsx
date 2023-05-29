@@ -15,6 +15,9 @@ const Box1 = styled(Box)(({ theme }) => ({
     flex: 1,
     [theme.breakpoints.down("xl")]: {
         flex: "0 0 10%"
+    },
+    [theme.breakpoints.down("sm")]: {
+        display: "none"
     }
 }))
 
@@ -23,7 +26,6 @@ const SideNavBox = styled(Box)(({ theme }) => ({
     height: "100%",
     overflowY: "auto",
     position: "fixed",
-    borderRight: "1px solid rgb(239, 243, 244)",
     display: "flex",
     flexDirection: "column",
     padding: "0 10px",
@@ -38,7 +40,7 @@ const NavPadding = styled(Stack)(({ theme }) => ({
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
-    padding: "10px 18px",
+    padding: "10px 20px",
     borderRadius: "50px",
     gap: "20px",
     cursor: "pointer",
