@@ -10,6 +10,8 @@ import NotificationIcon from "../assets/bellIcon.svg";
 import ListIcon from "../assets/listIcon.svg";
 import { Avatar, Box, Stack, Typography, styled, Badge, Menu, MenuItem } from '@mui/material';
 import { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/actions/authAction";
 
 const Box1 = styled(Box)(({ theme }) => ({
     flex: 1,
@@ -154,6 +156,7 @@ const NavMenu = styled(Stack)(({ theme }) => ({
 }));
 
 const SideNav = () => {
+    const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -161,6 +164,7 @@ const SideNav = () => {
     };
     const handleClose = () => {
         setAnchorEl(null);
+        dispatch(logout())
     };
 
     return (
