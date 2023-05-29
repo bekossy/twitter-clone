@@ -12,6 +12,8 @@ import { Avatar, Box, Stack, Typography, styled, Badge, Menu, MenuItem } from '@
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/actions/authAction";
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 const Box1 = styled(Box)(({ theme }) => ({
     flex: 1,
@@ -157,6 +159,7 @@ const NavMenu = styled(Stack)(({ theme }) => ({
 
 const SideNav = () => {
     const dispatch = useDispatch();
+    const { user } = useSelector((state: RootState) => state.auth)
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -234,8 +237,8 @@ const SideNav = () => {
                             <Stack alignItems={"center"} direction={"row"} gap={1}>
                                 <Avatar sx={{ bgcolor: "#1D9BF0" }} />
                                 <Stack>
-                                    <Typography fontWeight={"bold"}>Hello</Typography>
-                                    <Typography>@hello</Typography>
+                                    <Typography fontWeight={"bold"}>{user.name}</Typography>
+                                    <Typography>@{user.username}</Typography>
                                 </Stack>
                             </Stack>
 
@@ -269,7 +272,7 @@ const SideNav = () => {
                             },
                         }}
                     >
-                        <MenuItem onClick={handleClose} sx={{ fontWeight: 700, padding: "10px" }}>Log out @hello</MenuItem>
+                        <MenuItem onClick={handleClose} sx={{ fontWeight: 700, padding: "10px" }}>Log out @{user.username}</MenuItem>
                     </Menu>
 
                 </SideNavBox >
