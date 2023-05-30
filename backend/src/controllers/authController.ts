@@ -58,7 +58,7 @@ export const register =async (req:Request, res:Response) => {
         const hash = await bcrypt.hash(password, salt);
         const user = await User.create({email, profileName, password: hash, username});
         const token = jwt.sign({_id: user._id}, process.env.SECRET!);
-        res.status(201).json({profileName, token, email, username});
+        res.status(201).json({name: profileName, token, email, username});
     } catch (error:any) {
         res.status(400).json({error: error.message})
     }
