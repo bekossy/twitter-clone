@@ -76,7 +76,7 @@ const SignupBtn = styled("button")({
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [isNext, setIsNext] = useState<boolean>(false);
+  const [isNext, setIsNext] = useState<boolean>(true);
   const [helpText, setHelpText] = useState<string>("");
   const [isError, setIsError] = useState(false);
   const dispatch = useDispatch();
@@ -86,7 +86,8 @@ const Login = () => {
     const user = localStorage.getItem("user");
 
     if (user) {
-      dispatch({ type: POST_AUTH_SUCCESS, payload: user })
+      const parsedUser = JSON.parse(user);
+      dispatch({ type: POST_AUTH_SUCCESS, payload: parsedUser });
     }
   }, []);
 
@@ -114,19 +115,18 @@ const Login = () => {
 
             <Typography textAlign={"left"} variant='h1' my={4} fontSize={"32px"} fontWeight={700}>Sign in to Twitter</Typography>
 
-            {isNext || (
-              <>
-                <SignupBtn>
-                  <img src={GoogleIcon} alt="" />
-                  Sign in with Google
-                </SignupBtn>
-                <SignupBtn sx={{ fontWeight: 600 }}>
-                  <AppleIcon />
-                  Sign in with Apple
-                </SignupBtn>
-                <Divider>or</Divider>
-              </>
-            )}
+            {isNext || <>
+              <SignupBtn>
+                <img src={GoogleIcon} alt="" />
+                Sign in with Google
+              </SignupBtn>
+              <SignupBtn sx={{ fontWeight: 600 }}>
+                <AppleIcon />
+                Sign in with Apple
+              </SignupBtn>
+              <Divider>or</Divider>
+            </>
+            }
 
             <Box component={"form"} onSubmit={handleSubmit}>
               <TextInput
@@ -159,12 +159,12 @@ const Login = () => {
               )}
             </Box>
 
-            {isNext || (
+            {isNext ||
               <>
                 <SignupBtn type="button" sx={{ fontWeight: 600, backgroundColor: "black", color: "#fff", "&:hover": { backgroundColor: "rgba(0,0,0,0.9)" } }} onClick={handleNext}>Next</SignupBtn>
                 <SignupBtn type="button" sx={{ fontWeight: 700 }}>Forgot password?</SignupBtn>
               </>
-            )}
+            }
 
             <Typography variant='body2' color={"#536471"} textAlign={"left"}>Don't have an account? <Link to={"/signup"} style={{ color: "#1D9BF0", textDecoration: "none" }}>Sign Up</Link></Typography>
           </SignupContent>
