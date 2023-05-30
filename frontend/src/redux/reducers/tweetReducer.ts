@@ -1,15 +1,26 @@
 import * as actionTypes from "../constants/tweetConstants";
 
+export interface dataObj{
+    createdAt: string;
+    profileName: string;
+    tweet: string;
+    _id: string;
+    __v?: number;
+    user_id: string;
+    username: string;
+    updatedAt: string
+}
+
 interface TweetState {
   loading: boolean;
   error: string | null;
-  tweet: string[];
+  data: dataObj[];
 }
 
 const initialState: TweetState = {
   loading: false,
   error: null,
-  tweet: [],
+  data: [],
 };
 
 export const getTweetsReducer = (state = initialState, action:any):TweetState => {
@@ -30,7 +41,7 @@ export const getTweetsReducer = (state = initialState, action:any):TweetState =>
             return{
                 ...state,
                 loading: false,
-                tweet: action.payload,
+                data: action.payload,
             }
         default:
             return state;
