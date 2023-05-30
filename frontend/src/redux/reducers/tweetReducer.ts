@@ -1,4 +1,4 @@
-import * as ActionTypes from "../constants/tweetConstants";
+import * as actionTypes from "../constants/tweetConstants";
 
 interface TweetState {
   loading: boolean;
@@ -14,19 +14,19 @@ const initialState: TweetState = {
 
 export const getTweetsReducer = (state = initialState, action:any):TweetState => {
     switch (action.type) {
-        case ActionTypes.GET_TWEETS:
+        case actionTypes.GET_TWEETS:
             return{
                 ...state,
                 loading: true,
                 error: null,
             }
-        case ActionTypes.GET_TWEETS_FAIL:
+        case actionTypes.GET_TWEETS_FAIL:
             return{
                 ...state,
                 loading: false,
                 error: action.payload,
             }
-        case ActionTypes.GET_TWEETS_SUCCESS:
+        case actionTypes.GET_TWEETS_SUCCESS:
             return{
                 ...state,
                 loading: false,
