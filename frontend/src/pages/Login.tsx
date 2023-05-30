@@ -76,7 +76,7 @@ const SignupBtn = styled("button")({
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [isNext, setIsNext] = useState<boolean>(true);
+  const [isNext, setIsNext] = useState<boolean>(false);
   const [helpText, setHelpText] = useState<string>("");
   const [isError, setIsError] = useState(false);
   const dispatch = useDispatch();
