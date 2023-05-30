@@ -6,6 +6,8 @@ import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded
 import RepeatRoundedIcon from '@mui/icons-material/RepeatRounded';
 import ChatBubbleOutlineRoundedIcon from '@mui/icons-material/ChatBubbleOutlineRounded';
 
+import { dataObj } from '../redux/reducers/tweetReducer';
+
 const TweetContent = styled(Box)({
     display: "flex",
     padding: "10px 20px",
@@ -54,9 +56,14 @@ const TweetTitle = styled(Stack)({
             color: "#1d9bf0"
         }
     },
-})
+});
 
-const Tweets = () => {
+interface Props {
+    tweets: dataObj;
+}
+
+const Tweets: React.FC<Props> = ({ tweets }) => {
+    const { username, profileName, createdAt, tweet } = tweets;
     return (
         <>
             <TweetContent>
@@ -65,16 +72,16 @@ const Tweets = () => {
                 <Box flex={1}>
                     <TweetTitle>
                         <Stack direction={"row"} alignItems={"center"} gap={"3px"}>
-                            <Typography fontWeight={"bold"} color={"#000!important"}>Name</Typography>
-                            <Typography>@username</Typography>
-                            <Typography>May 16</Typography>
+                            <Typography fontWeight={"bold"} color={"#000!important"}>{profileName}</Typography>
+                            <Typography>@{username}</Typography>
+                            <Typography>{createdAt}</Typography>
                         </Stack>
                         <Tooltip title="More">
                             <MoreHorizIcon />
                         </Tooltip>
                     </TweetTitle>
 
-                    <Typography mb={"10px"}>Tweet from user.</Typography>
+                    <Typography mb={"10px"}>{tweet}</Typography>
 
                     <Stack direction={"row"} alignItems={"center"} justifyContent={"space-evenly"}>
                         <Tooltip title="Reply" placement="bottom-start">
