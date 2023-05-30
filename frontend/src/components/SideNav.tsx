@@ -236,7 +236,7 @@ const SideNav = () => {
                         <NavMenu>
                             <Stack alignItems={"center"} direction={"row"} gap={1}>
                                 <Avatar sx={{ bgcolor: "#1D9BF0" }} />
-                                <Stack>
+                                <Stack alignItems={"flex-start"}>
                                     <Typography fontWeight={"bold"}>{user.name}</Typography>
                                     <Typography>@{user.username}</Typography>
                                 </Stack>
