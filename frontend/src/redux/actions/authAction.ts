@@ -8,8 +8,8 @@ export const login = (email: string, password: string):any => async (dispatch:an
 
     const { data } = await axios.post("http://localhost:5000/api/auth/login", { email, password });
 
+    localStorage.setItem("user", JSON.stringify(data));
     dispatch({ type: actionTypes.POST_AUTH_SUCCESS, payload: data });
-    localStorage.setItem("user", JSON.stringify(data)); 
     
   } catch (error: any) {
     if (error.response) {
@@ -42,8 +42,8 @@ export const signup = (email: string, password: string, username:string, profile
 
     const { data } = await axios.post("http://localhost:5000/api/auth/register", { email, password, username, profileName });
 
-    dispatch({ type: actionTypes.POST_AUTH_SUCCESS, payload: data });
     localStorage.setItem("user", JSON.stringify(data));
+    dispatch({ type: actionTypes.POST_AUTH_SUCCESS, payload: data });
     
   } catch (error: any) {
     if (error.response) {
