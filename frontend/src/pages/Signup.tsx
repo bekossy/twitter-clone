@@ -1,12 +1,13 @@
 import { Alert, Box, CircularProgress, InputAdornment, TextField, Typography, styled } from '@mui/material';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SignupCreate from '../components/SignupCreate';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signup } from '../redux/actions/authAction';
 import { RootState } from '../redux/store';
+import { POST_AUTH_SUCCESS } from '../redux/constants/authConstants';
 
 const SignupBox = styled(Box)({
     display: "flex",
@@ -83,6 +84,15 @@ const Signup = () => {
 
         dispatch(signup(email, password, username, name));
     };
+
+    useEffect(() => {
+        const user = localStorage.getItem("user");
+
+        if (user) {
+            const parsedUser = JSON.parse(user);
+            dispatch({ type: POST_AUTH_SUCCESS, payload: parsedUser });
+        }
+    }, []);
 
     return (
         <>
