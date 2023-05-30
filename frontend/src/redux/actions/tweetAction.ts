@@ -1,13 +1,12 @@
 import * as actionTypes from "../constants/tweetConstants";
 import axios from "axios";
-import {useSelector} from "react-redux";
 import { RootState } from "../store";
 
-export const getTweets = ():any => async (dispatch:any) => {
-    const {user} = useSelector((state:RootState) => state.auth);
+export const getTweets = ():any => async (dispatch:any, getState: () => RootState) => {
+    const {user} = getState().auth;
     try {
         dispatch({type: actionTypes.GET_TWEETS});
-        const {data} = await axios("http://localhost:5000/api/tweets/", {
+        const {data} = await axios.get("http://localhost:5000/api/tweets", {
             headers: {"Authorization": `Bearer ${user.token}`}
         });
 
