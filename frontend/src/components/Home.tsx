@@ -24,7 +24,7 @@ const HomeTitleOpts = styled(Box)({
     display: "flex",
     alignItems: "center",
 });
-const HomeTitleOpt = styled(Typography)({
+const HomeTitleOpt = styled(Box)({
     flex: 1,
     padding: "20px 0",
     fontSize: "16px",
