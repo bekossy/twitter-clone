@@ -8,7 +8,7 @@ import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlin
 import { useEffect, useState } from 'react';
 import Tweets from './Tweets';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTweets } from '../redux/actions/tweetAction';
+import { getTweets, postTweets } from '../redux/actions/tweetAction';
 import { RootState } from '../redux/store';
 
 const HomeBox = styled(Box)({
@@ -114,6 +114,12 @@ const Home = () => {
     const { loading, error, data } = useSelector((state: RootState) => state.getTweets);
     const { user } = useSelector((state: RootState) => state.auth);
 
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        dispatch(postTweets(tweet))
+        setTweet("")
+    }
+
     useEffect(() => {
         if (user) {
             dispatch(getTweets());
@@ -131,7 +137,7 @@ const Home = () => {
             </HomeTitle>
             <HomeContent>
                 <Avatar />
-                <Box component={"form"} flex={1}>
+                <Box component={"form"} flex={1} onSubmit={handleSubmit}>
                     <TweetField
                         placeholder='What is happening?!'
                         fullWidth
