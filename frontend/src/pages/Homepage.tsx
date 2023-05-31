@@ -1,8 +1,9 @@
-import { Box, styled } from "@mui/material"
-import SideNav from "../components/SideNav"
-import Home from "../components/Home"
-import Trends from "../components/Trends"
-import Message from "../components/Message"
+import { Box, styled } from "@mui/material";
+import SideNav from "../components/SideNav";
+import Home from "../components/Home";
+import Trends from "../components/Trends";
+import Message from "../components/Message";
+import SpeedDialComponent from "../components/SpeedDialComponent";
 
 const HomepageBox = styled(Box)({
   display: "flex",
@@ -17,6 +18,7 @@ const Homepage = () => {
         <Home />
         <Trends />
         <Message />
+        <SpeedDialComponent />
       </HomepageBox>
     </>
   )
