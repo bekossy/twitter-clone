@@ -47,3 +47,20 @@ export const getTweetsReducer = (state = initialState, action:any):TweetState =>
             return state;
     }
 }
+
+export const tweetReducer = (state = initialState, action:any):TweetState => {
+    switch (action.type) {
+        case actionTypes.POST_TWEETS:
+            return{
+                ...state,
+                data: [...state.data, action.payload]
+            }
+        case actionTypes.DELETE_TWEET:
+            return{
+                ...state,
+                data: state.data.filter((item) => item._id !== action.payload)
+            }
+        default:
+            return state;
+    }
+}
