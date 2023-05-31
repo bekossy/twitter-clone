@@ -9,8 +9,7 @@ import {
     styled,
 } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-
+import TrendContents from './TrendContent';
 
 const SearchBox = styled(Box)({
     position: "sticky",
@@ -55,14 +54,6 @@ const TrendContent = styled(Box)({
     cursor: "pointer",
     "&:hover": {
         backgroundColor: "rgba(0,0,0,0.05)"
-    }
-});
-const Trending = styled(Box)({
-    display: "flex",
-    justifyContent: "space-between",
-    color: "#536471",
-    "& div p:nth-of-type(2)": {
-        color: "#0f1419"
     }
 });
 const TrendFollow = styled(Box)({
@@ -120,116 +111,18 @@ const Trends = () => {
                 <TrendText>
                     <Typography fontSize={"22px"} fontWeight={700}>Trends for you</Typography>
                 </TrendText>
-                <TrendContent>
-                    <Trending>
-                        <Stack>
-                            <Typography fontSize={"13px"}>Trending in your country</Typography>
-                            <Typography fontWeight={700}>Hello World</Typography>
-                            <Typography fontSize={"13px"}>25.1k Tweets</Typography>
-                        </Stack>
 
-                        <MoreHorizIcon />
-                    </Trending>
-                </TrendContent>
-                <TrendContent>
-                    <Trending>
-                        <Stack>
-                            <Typography fontSize={"13px"}>Trending in your country</Typography>
-                            <Typography fontWeight={700}>Hello World</Typography>
-                            <Typography fontSize={"13px"}>25.1k Tweets</Typography>
-                        </Stack>
+                <TrendContents trend='Trending in your country' tweets='25.1k' about='Hello World' />
+                <TrendContents trend='Technology - Trending' tweets='37.3k' about='TypeScript' />
+                <TrendContents trend='Music - Trending' tweets='1k' about='New Music' />
+                <TrendContents trend='Sports - Trending' tweets='21k' about='Football' />
+                <TrendContents trend='Politics - Trending' tweets='11k' about='President' />
+                <TrendContents trend='Comedy - Trending' tweets='1,016' about='Skit' />
+                <TrendContents trend='Trending in Nigeria' tweets='5.1k' about='Country' />
+                <TrendContents trend='Trending in your country' tweets='25.1k' about='Hello World' />
+                <TrendContents trend='Trending in your country' tweets='25.1k' about='Hello World' />
+                <TrendContents trend='Trending in your country' tweets='25.1k' about='Hello World' />
 
-                        <MoreHorizIcon />
-                    </Trending>
-                </TrendContent>
-                <TrendContent>
-                    <Trending>
-                        <Stack>
-                            <Typography fontSize={"13px"}>Trending in your country</Typography>
-                            <Typography fontWeight={700}>Hello World</Typography>
-                            <Typography fontSize={"13px"}>25.1k Tweets</Typography>
-                        </Stack>
-
-                        <MoreHorizIcon />
-                    </Trending>
-                </TrendContent>
-                <TrendContent>
-                    <Trending>
-                        <Stack>
-                            <Typography fontSize={"13px"}>Trending in your country</Typography>
-                            <Typography fontWeight={700}>Hello World</Typography>
-                            <Typography fontSize={"13px"}>25.1k Tweets</Typography>
-                        </Stack>
-
-                        <MoreHorizIcon />
-                    </Trending>
-                </TrendContent>
-                <TrendContent>
-                    <Trending>
-                        <Stack>
-                            <Typography fontSize={"13px"}>Trending in your country</Typography>
-                            <Typography fontWeight={700}>Hello World</Typography>
-                            <Typography fontSize={"13px"}>25.1k Tweets</Typography>
-                        </Stack>
-
-                        <MoreHorizIcon />
-                    </Trending>
-                </TrendContent>
-                <TrendContent>
-                    <Trending>
-                        <Stack>
-                            <Typography fontSize={"13px"}>Trending in your country</Typography>
-                            <Typography fontWeight={700}>Hello World</Typography>
-                            <Typography fontSize={"13px"}>25.1k Tweets</Typography>
-                        </Stack>
-
-                        <MoreHorizIcon />
-                    </Trending>
-                </TrendContent>
-                <TrendContent>
-                    <Trending>
-                        <Stack>
-                            <Typography fontSize={"13px"}>Trending in your country</Typography>
-                            <Typography fontWeight={700}>Hello World</Typography>
-                            <Typography fontSize={"13px"}>25.1k Tweets</Typography>
-                        </Stack>
-
-                        <MoreHorizIcon />
-                    </Trending>
-                </TrendContent>
-                <TrendContent>
-                    <Trending>
-                        <Stack>
-                            <Typography fontSize={"13px"}>Trending in your country</Typography>
-                            <Typography fontWeight={700}>Hello World</Typography>
-                            <Typography fontSize={"13px"}>25.1k Tweets</Typography>
-                        </Stack>
-
-                        <MoreHorizIcon />
-                    </Trending>
-                </TrendContent>
-                <TrendContent>
-                    <Trending>
-                        <Stack>
-                            <Typography fontSize={"13px"}>Trending in your country</Typography>
-                            <Typography fontWeight={700}>Hello World</Typography>
-                            <Typography fontSize={"13px"}>25.1k Tweets</Typography>
-                        </Stack>
-
-                        <MoreHorizIcon />
-                    </Trending>
-                </TrendContent>
-                <TrendContent>
-                    <Trending>
-                        <Stack>
-                            <Typography fontSize={"13px"}>Trending in your country</Typography>
-                            <Typography fontWeight={700}>Hello World</Typography>
-                            <Typography fontSize={"13px"}>25.1k Tweets</Typography>
-                        </Stack>
-
-                        <MoreHorizIcon />
-                    </Trending>
-                </TrendContent>
                 <TrendContent sx={{ borderBottomLeftRadius: "15px", borderBottomRightRadius: "15px" }}>
                     <Typography color={"#1D9BF0"} >Show more</Typography>
                 </TrendContent>
