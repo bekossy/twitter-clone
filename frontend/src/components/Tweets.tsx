@@ -5,7 +5,7 @@ import BarChartRoundedIcon from '@mui/icons-material/BarChartRounded';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import RepeatRoundedIcon from '@mui/icons-material/RepeatRounded';
 import ChatBubbleOutlineRoundedIcon from '@mui/icons-material/ChatBubbleOutlineRounded';
-
+import { format } from "date-fns"
 import { dataObj } from '../redux/reducers/tweetReducer';
 
 const TweetContent = styled(Box)({
@@ -64,6 +64,9 @@ interface Props {
 
 const Tweets: React.FC<Props> = ({ tweets }) => {
     const { username, profileName, createdAt, tweet } = tweets;
+
+    const date: Date = new Date(createdAt);
+    const dateFormat: string = format(date, 'MMMM d');
     return (
         <>
             <TweetContent>
@@ -74,7 +77,7 @@ const Tweets: React.FC<Props> = ({ tweets }) => {
                         <Stack direction={"row"} alignItems={"center"} gap={"3px"}>
                             <Typography fontWeight={"bold"} color={"#000!important"}>{profileName}</Typography>
                             <Typography>@{username}</Typography>
-                            <Typography>{createdAt}</Typography>
+                            <Typography>{dateFormat}</Typography>
                         </Stack>
                         <Tooltip title="More">
                             <MoreHorizIcon />
