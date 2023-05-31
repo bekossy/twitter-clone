@@ -1,12 +1,18 @@
-import { Avatar, Box, Stack, Tooltip, Typography, styled } from '@mui/material';
+import { Avatar, Box, Menu, MenuItem, Stack, Tooltip, Typography, styled } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import IosShareRoundedIcon from '@mui/icons-material/IosShareRounded';
 import BarChartRoundedIcon from '@mui/icons-material/BarChartRounded';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import RepeatRoundedIcon from '@mui/icons-material/RepeatRounded';
 import ChatBubbleOutlineRoundedIcon from '@mui/icons-material/ChatBubbleOutlineRounded';
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
+import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { format } from "date-fns"
 import { dataObj } from '../redux/reducers/tweetReducer';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { useState } from 'react';
 
 const TweetContent = styled(Box)({
     display: "flex",
@@ -57,16 +63,37 @@ const TweetTitle = styled(Stack)({
         }
     },
 });
+const Items = styled(MenuItem)({
+    display: "flex",
+    gap: "5px",
+    padding: "6px",
+    fontWeight: 600,
+    "& p": {
+        fontSize: "14px"
+    }
+})
 
 interface Props {
     tweets: dataObj;
 }
 
 const Tweets: React.FC<Props> = ({ tweets }) => {
-    const { username, profileName, createdAt, tweet } = tweets;
+    const { username, profileName, createdAt, tweet, } = tweets;
+    const { user } = useSelector((state: RootState) => state.auth);
+
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
+
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     const date: Date = new Date(createdAt);
     const dateFormat: string = format(date, 'MMMM d');
+
     return (
         <>
             <TweetContent>
@@ -79,7 +106,14 @@ const Tweets: React.FC<Props> = ({ tweets }) => {
                             <Typography>@{username}</Typography>
                             <Typography>{dateFormat}</Typography>
                         </Stack>
-                        <Tooltip title="More">
+                        <Tooltip
+                            title="More"
+                            id="nav-btn"
+                            aria-controls={open ? 'nav-menu' : undefined}
+                            aria-haspopup="true"
+                            aria-expanded={open ? 'true' : undefined}
+                            onClick={handleClick}
+                        >
                             <MoreHorizIcon />
                         </Tooltip>
                     </TweetTitle>
@@ -128,6 +162,45 @@ const Tweets: React.FC<Props> = ({ tweets }) => {
                     </Stack>
                 </Box>
             </TweetContent>
+            <Menu
+                id="nav-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                    'aria-labelledby': 'nav-btn',
+                }}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+                transformOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                }}
+
+                PaperProps={{
+                    style: {
+                        maxWidth: "150px",
+                        width: "100%",
+                    },
+                }}
+            >
+                {
+                    username === user.username ? (
+
+                        <Items>
+                            <DeleteOutlineOutlinedIcon fontSize='small' />
+                            <Typography>Delete</Typography>
+                        </Items>
+                    ) : (
+                        <Items>
+                            <VisibilityRoundedIcon fontSize='small' />
+                            <Typography>{username}'s tweet</Typography>
+                        </Items>
+                    )
+                }
+            </Menu>
         </>
     )
 }
