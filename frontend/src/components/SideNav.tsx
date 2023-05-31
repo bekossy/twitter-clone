@@ -159,7 +159,8 @@ const NavMenu = styled(Stack)(({ theme }) => ({
 
 const SideNav = () => {
     const dispatch = useDispatch();
-    const { user } = useSelector((state: RootState) => state.auth)
+    const { user } = useSelector((state: RootState) => state.auth);
+    const { data } = useSelector((state: RootState) => state.getTweets)
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -188,7 +189,7 @@ const SideNav = () => {
                             <NavText>Explore</NavText>
                         </NavPadding>
                         <NavPadding>
-                            <Badge color='primary' sx={{ '& .MuiBadge-badge': { left: "-25px", right: "15px", bgcolor: "#1D9BF0" } }} badgeContent={21} max={20}>
+                            <Badge color='primary' sx={{ '& .MuiBadge-badge': { left: "-20px", right: "10px", bgcolor: "#1D9BF0" } }} badgeContent={data.length} max={20}>
                                 <img src={NotificationIcon} alt="" />
                             </Badge>
                             <NavText>Notifications</NavText>
