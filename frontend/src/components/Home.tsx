@@ -1,16 +1,20 @@
-import { Avatar, Box, Button, Stack, TextField, Tooltip, Typography, styled } from '@mui/material';
+import { Avatar, Box, Button, CircularProgress, Stack, TextField, Tooltip, Typography, styled } from '@mui/material';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import GifBoxOutlinedIcon from '@mui/icons-material/GifBoxOutlined';
 import ChecklistRoundedIcon from '@mui/icons-material/ChecklistRounded';
 import SentimentSatisfiedAltRoundedIcon from '@mui/icons-material/SentimentSatisfiedAltRounded';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Tweets from './Tweets';
+import { useSelector, useDispatch } from 'react-redux';
+import { getTweets } from '../redux/actions/tweetAction';
+import { RootState } from '../redux/store';
 
 const HomeBox = styled(Box)({
     flex: 2,
-    border: "1px solid rgb(239, 243, 244)",
+    borderLeft: "1px solid rgb(239, 243, 244)",
+    borderRight: "1px solid rgb(239, 243, 244)",
 })
 const HomeTitle = styled(Box)({
     position: "sticky",
@@ -67,6 +71,7 @@ const TweetBtns = styled(Box)({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
+    flexWrap: "wrap",
     padding: "5px 10px 0",
     "& button": {
         backgroundColor: "#1d9bf0",
@@ -95,9 +100,25 @@ const TweetBtns = styled(Box)({
         }
     }
 });
+const Mssg = styled(Box)({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "300px",
+    color: "#536471"
+})
 
 const Home = () => {
     const [tweet, setTweet] = useState("");
+    const dispatch = useDispatch();
+    const { loading, error, data } = useSelector((state: RootState) => state.getTweets);
+    const { user } = useSelector((state: RootState) => state.auth);
+
+    useEffect(() => {
+        if (user) {
+            dispatch(getTweets());
+        }
+    }, [dispatch, user]);
 
     return (
         <HomeBox flex={2}>
@@ -144,11 +165,27 @@ const Home = () => {
                 </Box>
             </HomeContent>
 
-            <Tweets />
-            <Tweets />
-            <Tweets />
-            <Tweets />
-            <Tweets />
+            {loading ? (
+                <Mssg>
+                    <CircularProgress />
+                </Mssg>
+            ) : error ? (
+                <Mssg>{error}</Mssg>
+            ) : (
+                data.length ? (
+                    data.map((tweet) => (
+                        <Tweets
+                            key={tweet._id}
+                            tweets={tweet}
+                        />
+                    ))
+                ) : (
+                    <Mssg>
+                        <Typography>No tweets, be the first!</Typography>
+                    </Mssg >
+                )
+            )}
+
         </HomeBox>
     )
 }
