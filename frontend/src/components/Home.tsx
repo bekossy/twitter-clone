@@ -5,6 +5,7 @@ import ChecklistRoundedIcon from '@mui/icons-material/ChecklistRounded';
 import SentimentSatisfiedAltRoundedIcon from '@mui/icons-material/SentimentSatisfiedAltRounded';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
+import TwitterIcon from '@mui/icons-material/Twitter';
 import { useEffect, useState } from 'react';
 import Tweets from './Tweets';
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,14 +17,38 @@ const HomeBox = styled(Box)({
     borderLeft: "1px solid rgb(239, 243, 244)",
     borderRight: "1px solid rgb(239, 243, 244)",
 })
-const HomeTitle = styled(Box)({
+const HomeTitle = styled(Box)(({ theme }) => ({
     position: "sticky",
     top: 0,
     backdropFilter: "blur(12px)",
     backgroundColor: "rgba(255,255,255,0.7)",
     borderBottom: "1px solid rgb(239, 243, 244)",
-    zIndex: 10
-});
+    zIndex: 10,
+    "& h1": {
+        fontWeight: 600,
+        padding: "10px 20px",
+        textAlign: "left"
+    },
+    "& svg": {
+        display: "none",
+        marginTop: "10px",
+        color: "#1D9BF0",
+        cursor: "pointer",
+    },
+    [theme.breakpoints.down("sm")]: {
+        "& > span": {
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+        },
+        "& h1": {
+            display: "none"
+        },
+        "& svg": {
+            display: "block"
+        },
+    }
+}));
 const HomeTitleOpts = styled(Box)({
     display: "flex",
     alignItems: "center",
@@ -129,7 +154,11 @@ const Home = () => {
     return (
         <HomeBox flex={2}>
             <HomeTitle>
-                <Typography variant='h6' component={"h1"} fontWeight={600} padding={"10px 20px"}>Home</Typography>
+                <Box component={"span"}>
+                    <Typography variant='h6' component={"h1"}>Home</Typography>
+                    <TwitterIcon fontSize='large' />
+                </Box>
+
                 <HomeTitleOpts>
                     <HomeTitleOpt>For you <Box position={"absolute"} left={"40%"} bottom={-3} borderRadius={"20px"} width={"60px"} height={"5px"} bgcolor={"#1d9bf0"} ></Box></HomeTitleOpt>
                     <HomeTitleOpt>Following</HomeTitleOpt>
