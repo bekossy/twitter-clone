@@ -167,7 +167,6 @@ const SideNav = () => {
     };
     const handleClose = () => {
         setAnchorEl(null);
-        dispatch(logout())
     };
 
     return (
@@ -267,12 +266,12 @@ const SideNav = () => {
 
                         PaperProps={{
                             style: {
-                                maxWidth: "250px",
+                                maxWidth: "200px",
                                 width: "100%",
                             },
                         }}
                     >
-                        <MenuItem onClick={handleClose} sx={{ fontWeight: 700, padding: "10px" }}>Log out @{user.username}</MenuItem>
+                        <MenuItem onClick={() => dispatch(logout())} sx={{ fontWeight: 700, padding: "10px" }}>Log out @{user.username}</MenuItem>
                     </Menu>
 
                 </SideNavBox >
