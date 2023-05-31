@@ -31,7 +31,7 @@ const HomeTitle = styled(Box)(({ theme }) => ({
     },
     "& svg": {
         display: "none",
-        marginTop: "10px",
+        margin: "10px 0",
         color: "#1D9BF0",
         cursor: "pointer",
     },
