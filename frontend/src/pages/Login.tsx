@@ -115,7 +115,8 @@ const Login = () => {
 
             <Typography textAlign={"left"} variant='h1' my={4} fontSize={"32px"} fontWeight={700}>Sign in to Twitter</Typography>
 
-            {isNext || <>
+
+            <Box display={`${isNext ? "none" : "block"}`}>
               <SignupBtn>
                 <img src={GoogleIcon} alt="" />
                 Sign in with Google
@@ -125,8 +126,9 @@ const Login = () => {
                 Sign in with Apple
               </SignupBtn>
               <Divider>or</Divider>
-            </>
-            }
+            </Box>
+
+
 
             <Box component={"form"} onSubmit={handleSubmit}>
               <TextInput
@@ -159,12 +161,11 @@ const Login = () => {
               )}
             </Box>
 
-            {isNext ||
-              <>
-                <SignupBtn type="button" sx={{ fontWeight: 600, backgroundColor: "black", color: "#fff", "&:hover": { backgroundColor: "rgba(0,0,0,0.9)" } }} onClick={handleNext}>Next</SignupBtn>
-                <SignupBtn type="button" sx={{ fontWeight: 700 }}>Forgot password?</SignupBtn>
-              </>
-            }
+            <Box display={`${isNext ? "none" : "block"}`}>
+              <SignupBtn type="button" sx={{ fontWeight: 600, backgroundColor: "black", color: "#fff", "&:hover": { backgroundColor: "rgba(0,0,0,0.9)" } }} onClick={handleNext}>Next</SignupBtn>
+              <SignupBtn type="button" sx={{ fontWeight: 700 }}>Forgot password?</SignupBtn>
+            </Box>
+
 
             <Typography variant='body2' color={"#536471"} textAlign={"left"}>Don't have an account? <Link to={"/signup"} style={{ color: "#1D9BF0", textDecoration: "none" }}>Sign Up</Link></Typography>
           </SignupContent>
