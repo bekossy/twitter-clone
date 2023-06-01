@@ -5,10 +5,13 @@ import Trends from "../components/Trends";
 import Message from "../components/Message";
 import SpeedDialComponent from "../components/SpeedDialComponent";
 
-const HomepageBox = styled(Box)({
+const HomepageBox = styled(Box)(({ theme }) => ({
   display: "flex",
-  gap: "10px"
-})
+  gap: "10px",
+  [theme.breakpoints.down("lg")]: {
+    gap: "0"
+  }
+}));
 
 const Homepage = () => {
   return (

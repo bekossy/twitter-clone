@@ -69,12 +69,15 @@ const HomeTitleOpt = styled(Box)({
         fontWeight: 400,
     }
 });
-const HomeContent = styled(Box)({
+const HomeContent = styled(Box)(({ theme }) => ({
     display: "flex",
     padding: "10px 20px",
     gap: "10px",
     borderBottom: "1px solid rgb(239, 243, 244)",
-});
+    [theme.breakpoints.down("sm")]: {
+        padding: "10px 10px"
+    }
+}));
 const TweetField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
         backgroundColor: "#fff",

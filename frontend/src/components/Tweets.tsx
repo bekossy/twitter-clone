@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { useState } from 'react';
 
-const TweetContent = styled(Box)({
+const TweetContent = styled(Box)(({ theme }) => ({
     display: "flex",
     padding: "10px 20px",
     gap: "10px",
@@ -23,7 +23,10 @@ const TweetContent = styled(Box)({
     "&:hover": {
         backgroundColor: "rgba(0,0,0,0.05)"
     },
-});
+    [theme.breakpoints.down("sm")]: {
+        padding: "10px 10px"
+    }
+}));
 const IconContainer = styled(Stack)({
     flexDirection: "row",
     alignItems: "center",
