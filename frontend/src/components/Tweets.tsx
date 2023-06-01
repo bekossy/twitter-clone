@@ -5,7 +5,6 @@ import BarChartRoundedIcon from '@mui/icons-material/BarChartRounded';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import RepeatRoundedIcon from '@mui/icons-material/RepeatRounded';
 import ChatBubbleOutlineRoundedIcon from '@mui/icons-material/ChatBubbleOutlineRounded';
-import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { format } from "date-fns"
@@ -192,17 +191,10 @@ const Tweets: React.FC<Props> = ({ tweets, handleDelete }) => {
             >
                 {
                     username === user.username ? (
-
-                        <Box>
                             <Items onClick={() => handleDelete(_id)}>
                                 <DeleteOutlineOutlinedIcon fontSize='small' />
                                 <Typography>Delete</Typography>
                             </Items>
-                            <Items onClick={() => console.log("Edit")}>
-                                <BorderColorOutlinedIcon fontSize='small' />
-                                <Typography>Edit</Typography>
-                            </Items>
-                        </Box>
                     ) : (
                         <Items disabled={true}>
                             <VisibilityRoundedIcon fontSize='small' />
