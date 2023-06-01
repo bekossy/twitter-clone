@@ -30,15 +30,15 @@ export const postTweets = (tweet:string):any => async (dispatch:any, getState: (
     }
 }
 
-export const deleteTweet = (id:string):any =>async (dispatch:any, getState:()=>RootState) => {
+export const deleteTweet = (id:string):any => async (dispatch:any, getState: () => RootState) => {
     const {user} = getState().auth;
     try {
         dispatch({type: actionTypes.DELETE_TWEET_REQUEST});
         const {data} = await axios.delete(`http://localhost:5000/api/tweets/${id}`, {
             headers: {"Authorization": `Bearer ${user.token}`}
-        });
+        });        
 
-        dispatch({type: actionTypes.DELETE_TWEET_SUCCESS, payload: data})
+        dispatch({type: actionTypes.DELETE_TWEET_SUCCESS, payload: data._id})
     } catch (error:any) {
         dispatch({type: actionTypes.DELETE_TWEET_FAIL, payload: error.response})
     }
