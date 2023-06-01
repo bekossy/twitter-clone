@@ -4,12 +4,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 // Import reducers
 import { authReducer } from '../redux/reducers/authReducer';
-import { getTweetsReducer, tweetReducer } from './reducers/tweetReducer';
+import { tweetReducer } from './reducers/tweetReducer';
 
 // Root reducer
 const rootReducer = combineReducers({
   auth: authReducer,
-  getTweets: getTweetsReducer,
   tweetReducer: tweetReducer,
 });
 
