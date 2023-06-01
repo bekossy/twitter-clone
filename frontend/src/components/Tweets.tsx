@@ -75,10 +75,11 @@ const Items = styled(MenuItem)({
 
 interface Props {
     tweets: dataObj;
+    handleDelete: (id: string) => Promise<void>
 }
 
-const Tweets: React.FC<Props> = ({ tweets }) => {
-    const { username, profileName, createdAt, tweet, } = tweets;
+const Tweets: React.FC<Props> = ({ tweets, handleDelete }) => {
+    const { username, profileName, createdAt, tweet, _id } = tweets;
     const { user } = useSelector((state: RootState) => state.auth);
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -189,12 +190,18 @@ const Tweets: React.FC<Props> = ({ tweets }) => {
                 {
                     username === user.username ? (
 
-                        <Items>
-                            <DeleteOutlineOutlinedIcon fontSize='small' />
-                            <Typography>Delete</Typography>
-                        </Items>
+                        <Box>
+                            <Items onClick={() => handleDelete(_id)}>
+                                <DeleteOutlineOutlinedIcon fontSize='small' />
+                                <Typography>Delete</Typography>
+                            </Items>
+                            <Items onClick={() => console.log("Edit")}>
+                                <BorderColorOutlinedIcon fontSize='small' />
+                                <Typography>Edit</Typography>
+                            </Items>
+                        </Box>
                     ) : (
-                        <Items>
+                        <Items disabled={true}>
                             <VisibilityRoundedIcon fontSize='small' />
                             <Typography>{username}'s tweet</Typography>
                         </Items>
