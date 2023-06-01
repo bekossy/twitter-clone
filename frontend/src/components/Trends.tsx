@@ -137,8 +137,8 @@ const Trends = () => {
                         <Stack direction={"row"} gap={"10px"} alignItems={"center"}>
                             <Avatar />
                             <Stack>
-                                <Typography fontSize={"14px"} fontWeight={"bold"}>hello</Typography>
-                                <Typography fontSize={"14px"}>hello</Typography>
+                                <Typography fontSize={"14px"} fontWeight={"bold"}>username</Typography>
+                                <Typography fontSize={"14px"}>name</Typography>
                             </Stack>
                         </Stack>
 
@@ -150,8 +150,8 @@ const Trends = () => {
                         <Stack direction={"row"} gap={"10px"} alignItems={"center"}>
                             <Avatar />
                             <Stack>
-                                <Typography fontWeight={"bold"}>hello</Typography>
-                                <Typography>hello</Typography>
+                                <Typography fontWeight={"bold"}>username</Typography>
+                                <Typography>name</Typography>
                             </Stack>
                         </Stack>
 
@@ -163,8 +163,8 @@ const Trends = () => {
                         <Stack direction={"row"} gap={"10px"} alignItems={"center"}>
                             <Avatar />
                             <Stack>
-                                <Typography fontSize={"14px"} fontWeight={"bold"}>hello</Typography>
-                                <Typography fontSize={"14px"}>hello</Typography>
+                                <Typography fontSize={"14px"} fontWeight={"bold"}>username</Typography>
+                                <Typography fontSize={"14px"}>name</Typography>
                             </Stack>
                         </Stack>
 
