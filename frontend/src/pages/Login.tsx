@@ -82,14 +82,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state: RootState) => state.auth);
 
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-
-    if (user) {
-      const parsedUser = JSON.parse(user);
-      dispatch({ type: POST_AUTH_SUCCESS, payload: parsedUser });
-    }
-  }, []);
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleNext = () => {
     if (email) {
@@ -104,7 +97,38 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(login(email, password));
+
+    setShowAlert(true); // Show the alert when form is submitted
+
+    const timer = setTimeout(() => {
+      setShowAlert(false); // Hide the alert after 3 seconds
+    }, 3000);
+
+    return () => {
+      clearTimeout(timer); // Clear the timer on component unmount or when form is resubmitted
+    };
   };
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+
+    if (user) {
+      const parsedUser = JSON.parse(user);
+      dispatch({ type: POST_AUTH_SUCCESS, payload: parsedUser });
+    }
+
+    if (error) {
+      setShowAlert(true);
+
+      const timer = setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [dispatch, error]);
 
   return (
     <>
@@ -152,8 +176,10 @@ const Login = () => {
                 />
               )}
 
-              {isNext && (
-                error && <Alert severity="error" sx={{ textAlign: "left" }}>{error}</Alert>
+              {isNext && error && showAlert && (
+                <Alert severity="error" sx={{ textAlign: "left" }}>
+                  {error}
+                </Alert>
               )}
 
               {isNext && (

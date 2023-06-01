@@ -79,20 +79,41 @@ const Signup = () => {
     const dispatch = useDispatch();
     const { loading, error } = useSelector((state: RootState) => state.auth);
 
+    const [showAlert, setShowAlert] = useState(false);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         dispatch(signup(email, password, username, name));
+
+        setShowAlert(true);
+        const timer = setTimeout(() => {
+            setShowAlert(false);
+        }, 3000);
+        return () => {
+            clearTimeout(timer);
+        };
     };
 
     useEffect(() => {
         const user = localStorage.getItem("user");
-
         if (user) {
             const parsedUser = JSON.parse(user);
             dispatch({ type: POST_AUTH_SUCCESS, payload: parsedUser });
         }
-    }, []);
+
+        if (error) {
+            setShowAlert(true);
+
+            const timer = setTimeout(() => {
+                setShowAlert(false);
+            }, 3000);
+
+            return () => {
+                clearTimeout(timer);
+            };
+        }
+    }, [dispatch, error]);
 
     return (
         <>
@@ -140,9 +161,11 @@ const Signup = () => {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
 
-                                {
-                                    error && <Alert severity="error" sx={{ textAlign: "left" }}>{error}</Alert>
-                                }
+                                {error && showAlert && (
+                                    <Alert severity="error" sx={{ textAlign: "left" }}>
+                                        {error}
+                                    </Alert>
+                                )}
 
                                 <FormBtn type="submit">{loading ? <CircularProgress size={24} sx={{ color: "#fff" }} /> : "Submit"}</FormBtn>
                             </Box>
