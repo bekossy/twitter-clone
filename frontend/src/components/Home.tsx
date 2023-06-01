@@ -9,7 +9,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import { useEffect, useState } from 'react';
 import Tweets from './Tweets';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTweets, postTweets } from '../redux/actions/tweetAction';
+import { deleteTweet, getTweets, postTweets } from '../redux/actions/tweetAction';
 import { RootState } from '../redux/store';
 
 const HomeBox = styled(Box)({
@@ -79,11 +79,14 @@ const TweetField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
         backgroundColor: "#fff",
         fontSize: "20px",
-        padding: "0",
         color: "#536471",
         borderBottom: "1px solid rgb(239, 243, 244)",
+        "& input": {
+            height: "3rem"
+        },
         '& fieldset': {
-            border: "none"
+            border: "none",
+            outline: "none"
         },
         "& ::placeholder": {
             color: "#000",
@@ -136,8 +139,14 @@ const Mssg = styled(Box)({
 const Home = () => {
     const [tweet, setTweet] = useState("");
     const dispatch = useDispatch();
-    const { loading, error, data } = useSelector((state: RootState) => state.getTweets);
+    const { loading, error, data } = useSelector((state: RootState) => state.tweetReducer);
     const { user } = useSelector((state: RootState) => state.auth);
+
+    useEffect(() => {
+        if (user) {
+            dispatch(getTweets());
+        }
+    }, [dispatch, user]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -145,11 +154,9 @@ const Home = () => {
         setTweet("")
     }
 
-    useEffect(() => {
-        if (user) {
-            dispatch(getTweets());
-        }
-    }, [dispatch, user]);
+    const handleDelete = async (id: string) => {
+        dispatch(deleteTweet(id));
+    }
 
     return (
         <HomeBox flex={2}>
@@ -212,6 +219,7 @@ const Home = () => {
                         <Tweets
                             key={tweet._id}
                             tweets={tweet}
+                            handleDelete={handleDelete}
                         />
                     ))
                 ) : (
