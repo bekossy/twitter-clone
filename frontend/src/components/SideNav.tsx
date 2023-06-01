@@ -160,7 +160,7 @@ const NavMenu = styled(Stack)(({ theme }) => ({
 const SideNav = () => {
     const dispatch = useDispatch();
     const { user } = useSelector((state: RootState) => state.auth);
-    const { data } = useSelector((state: RootState) => state.getTweets)
+    const { data } = useSelector((state: RootState) => state.tweetReducer);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
