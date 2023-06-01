@@ -37,15 +37,3 @@ export const deleteTweet =async (req:Request, res:Response) => {
         res.status(404).json({error:error.message})
     }
 }
-
-export const editTweet =async (req:Request, res:Response) => {
-    const {id} = req.params;
-    try {
-        if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).json({error: "Invalid ID"});
-        const updatedData = await Tweet.findOneAndUpdate({_id: id}, {...req.body});
-        if(!updatedData) return res.status(404).json({error: "No document found"});
-        res.status(200).json(updatedData)
-    } catch (error:any) {
-        res.status(404).json({error:error.message})
-    }
-}
