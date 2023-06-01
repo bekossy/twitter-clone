@@ -23,43 +23,44 @@ const initialState: TweetState = {
   data: [],
 };
 
-export const getTweetsReducer = (state = initialState, action:any):TweetState => {
+export const tweetReducer = (state = initialState, action:any):TweetState => {
     switch (action.type) {
-        case actionTypes.GET_TWEETS:
-            return{
-                ...state,
-                loading: true,
-                error: null,
-            }
-        case actionTypes.GET_TWEETS_FAIL:
-            return{
-                ...state,
-                loading: false,
-                error: action.payload,
-            }
+        case actionTypes.GET_TWEETS_REQUEST:
+            case actionTypes.DELETE_TWEET_REQUEST:
+                case actionTypes.POST_TWEET_REQUEST:
+                    return{
+                        ...state,
+                        loading: true,
+                        error: null,
+                    }
+
         case actionTypes.GET_TWEETS_SUCCESS:
             return{
                 ...state,
                 loading: false,
                 data: action.payload,
             }
-        default:
-            return state;
-    }
-}
+        case actionTypes.POST_TWEET_SUCCESS:
+            return{
+                ...state,
+                loading: false,
+                data: [action.payload, ...state.data]
+            }
+        case actionTypes.DELETE_TWEET_SUCCESS:
+            return{
+                ...state,
+                loading: false,
+                data: state.data.filter((item) => item._id !== action.payload),
+            }
 
-export const tweetReducer = (state = initialState, action:any):TweetState => {
-    switch (action.type) {
-        case actionTypes.POST_TWEETS:
-            return{
-                ...state,
-                data: [...state.data, action.payload]
-            }
-        case actionTypes.DELETE_TWEET:
-            return{
-                ...state,
-                data: state.data.filter((item) => item._id !== action.payload)
-            }
+        case actionTypes.GET_TWEETS_FAIL:
+            case actionTypes.DELETE_TWEET_FAIL:
+                case actionTypes.POST_TWEET_FAIL:
+                    return{
+                        ...state,
+                        loading: false,
+                        error: action.payload,
+                    }
         default:
             return state;
     }
