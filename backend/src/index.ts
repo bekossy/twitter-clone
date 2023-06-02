@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import {config} from 'dotenv';
@@ -12,6 +12,10 @@ app.use(cors({
 }))
 
 app.use(express.json());
+
+app.get("/", (req:Request,res:Response) => {
+    res.status(200).json({mssg: "Welcome to my twitter clone server"})
+})
 
 app.use("/api/auth", authRoutes);
 app.use("/api/tweets", tweetRoutes);
