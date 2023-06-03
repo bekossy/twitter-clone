@@ -6,7 +6,7 @@ export const login = (email: string, password: string):any => async (dispatch:an
   try {
     dispatch({ type: actionTypes.POST_AUTH });
 
-    const { data } = await axios.post("http://localhost:5000/api/auth/login", { email, password });
+    const { data } = await axios.post("https://twitter-clone-backend-38le.onrender.com/api/auth/login", { email, password });
 
     localStorage.setItem("user", JSON.stringify(data));
     dispatch({ type: actionTypes.POST_AUTH_SUCCESS, payload: data });
@@ -40,7 +40,7 @@ export const signup = (email: string, password: string, username:string, profile
     try {
     dispatch({ type: actionTypes.POST_AUTH });
 
-    const { data } = await axios.post("http://localhost:5000/api/auth/register", { email, password, username, profileName });
+    const { data } = await axios.post("https://twitter-clone-backend-38le.onrender.com/api/auth/register", { email, password, username, profileName });
 
     localStorage.setItem("user", JSON.stringify(data));
     dispatch({ type: actionTypes.POST_AUTH_SUCCESS, payload: data });

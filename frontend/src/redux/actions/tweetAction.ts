@@ -6,7 +6,7 @@ export const getTweets = ():any => async (dispatch:any, getState: () => RootStat
     const {user} = getState().auth;
     try {
         dispatch({type: actionTypes.GET_TWEETS_REQUEST});
-        const {data} = await axios.get("http://localhost:5000/api/tweets", {
+        const {data} = await axios.get("https://twitter-clone-backend-38le.onrender.com/api/tweets", {
             headers: {"Authorization": `Bearer ${user.token}`}
         });
 
@@ -20,7 +20,7 @@ export const postTweets = (tweet:string):any => async (dispatch:any, getState: (
     const {user} = getState().auth
     try {
         dispatch({type: actionTypes.POST_TWEET_REQUEST});
-        const {data} = await axios.post("http://localhost:5000/api/tweets", {tweet}, {
+        const {data} = await axios.post("https://twitter-clone-backend-38le.onrender.com/api/tweets", {tweet}, {
             headers: {"Authorization": `Bearer ${user.token}`}
         });
 
@@ -34,7 +34,7 @@ export const deleteTweet = (id:string):any => async (dispatch:any, getState: () 
     const {user} = getState().auth;
     try {
         dispatch({type: actionTypes.DELETE_TWEET_REQUEST});
-        const {data} = await axios.delete(`http://localhost:5000/api/tweets/${id}`, {
+        const {data} = await axios.delete(`https://twitter-clone-backend-38le.onrender.com/api/tweets/${id}`, {
             headers: {"Authorization": `Bearer ${user.token}`}
         });        
 
