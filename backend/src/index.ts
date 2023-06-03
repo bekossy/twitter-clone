@@ -8,12 +8,7 @@ config();
 const app = express();
 
 app.use(cors({
-    origin: ["https://twitter-clone-frontend-uij1.onrender.com",
-            "https://twitter-clone-frontend-uij1.onrender.com/login",
-            "https://twitter-clone-frontend-uij1.onrender.com/signup",
-            "http://127.0.0.1:5173/", 
-            "http://127.0.0.1:5173/login", 
-            "http://127.0.0.1:5173/signup"]
+    origin: ["https://twitter-clone-frontend-uij1.onrender.com", "http://127.0.0.1:5173"]
 }))
 
 app.use(express.json());
